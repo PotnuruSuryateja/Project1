@@ -1,0 +1,93 @@
+<% layout("/layouts/boilerplate") %>
+<div class="row">
+  <div class="col-8 offset-2">
+    <h3>Create a New Listing</h3>
+    <form method="POST" action="/listings" novalidate class="needs-validation" enctype="multipart/form-data">
+      <div class="mb-3">
+        <label for="title" class="form-label">Title</label>
+        <input name="listing[title]" placeholder="enter title" type="text" class="form-control" required/>
+        <div class="valid-feedback">Good Title</div>
+      </div>
+
+      <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <textarea
+        name="listing[description]"
+        placeholder="enter description"
+        class="form-control"
+        required
+      ></textarea>
+      <div class="invalid-feedback">Vaild description is needed</div>
+      </div>
+
+      <div class="mb-3">
+        <label for="image" class="form-label">Upload Image</label>
+        <input
+        name="listing[image][url]"
+        type="file"
+        class="form-control"
+        required
+      />
+      </div>
+
+      <div class="row">
+
+        <div class="mb-3 col-md-4">
+        <label for="price" class="form-label">Price</label>
+        <input name="listing[price]" placeholder="enter price"  class="form-control" required/>
+        <div class="invalid-feedback">Vaild price is needed</div>
+        </div>
+      
+        <div class="mb-3 col-md-8">
+        <label for="country" class="form-label">Country</label>
+        <input name="listing[country]" placeholder="enter country" type="text" class="form-control"  required/>
+        <div class="invalid-feedback">Vaild country is needed</div>
+        </div>
+
+      </div>
+      
+      <div class="mb-3">
+        <label for="location" class="form-label">Location</label>
+        <input
+        name="listing[location]"
+        placeholder="enter location"
+        type="text"
+        class="form-control"
+        required
+      />
+      <div class="invalid-feedback">Vaild location is needed</div>
+      </div>
+
+      <button class="btn btn-dark add-btn">Add</button>
+      <br><br>
+    </form>
+    </div>
+</div>
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wanderlust</title>
+</head>
+<body>
+    <h3>Add new one</h3>
+    <form action="/listings" method="post">
+        <input type="text" placeholder="enter title" name="listing[title]">
+        <br><br>
+        <textarea type="text" placeholder="enter description" name="listing[description]"></textarea>
+        <br><br>
+        <input type="text" placeholder="enter img url" name="listing[image]">
+        <br><br>
+        <input type="number" placeholder="enter price" name="listing[price]">
+        <br><br>
+        <input type="text" placeholder="enter location" name="listing[location]">
+        <br><br>
+        <input type="text" placeholder="enter country" name="listing[country]">
+        <br><br>
+        <button>Add</button>
+    </form>
+</body>
+</html> -->
