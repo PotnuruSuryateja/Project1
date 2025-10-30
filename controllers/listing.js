@@ -3,10 +3,37 @@ const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
 const mapToken = process.env.MAP_TOKEN ;
 const geocodingClient = mbxGeocoding({ accessToken: mapToken });
 
-module.exports.index = async(req,res)=>{
-    const allListings = await Listing.find({});
-    res.render("listings/index.ejs",{allListings});
-    console.log("Successful!!");
+module.exports.index = async (req, res) => {
+    try {
+        const { search } = req.query;
+        let allListings;
+        let flashMessage = null; // store error temporarily
+
+        if (search && search.trim() !== "") {
+            allListings = await Listing.find({
+                title: { $regex: search, $options: "i" }
+            });
+
+            if (allListings.length === 0) {
+                flashMessage = `Not found !`;
+                allListings = await Listing.find({});
+            }
+        } else {
+            allListings = await Listing.find({});
+        }
+
+        res.render("listings/index.ejs", {
+            allListings,
+            error: flashMessage // Pass directly to EJS
+        });
+
+    } catch (err) {
+        console.error("Error fetching listings:", err);
+        res.render("listings/index.ejs", {
+            allListings: [],
+            error: "Something went wrong while fetching listings."
+        });
+    }
 };
 
 module.exports.newFormRender = async (req, res) => {
